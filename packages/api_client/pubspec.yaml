@@ -1,0 +1,21 @@
+name: api_client
+description: HTTP client for the app, wrapping Dio with auth, 401, and logging interceptors.
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ^3.41.0
+
+dependencies:
+  dio: ^5.7.0
+  flutter:
+    sdk: flutter
+  pretty_dio_logger: ^1.4.0
+  storage:
+    path: ../storage/storage
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.5
+  very_good_analysis: ^10.2.0

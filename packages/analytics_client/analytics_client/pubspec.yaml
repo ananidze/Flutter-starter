@@ -1,0 +1,11 @@
+name: analytics_client
+description: A Generic Analytics Client Interface.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dev_dependencies:
+  test: ^1.30.0
+  very_good_analysis: ^10.2.0

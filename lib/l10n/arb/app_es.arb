@@ -1,0 +1,76 @@
+{
+  "@@locale": "es",
+
+  "counterAppBarTitle": "Contador",
+
+  "commonCancel": "Cancelar",
+  "commonDelete": "Eliminar",
+  "commonOr": "o",
+
+  "emailLabel": "Correo electrónico",
+  "emailInvalid": "Correo electrónico inválido",
+  "passwordLabel": "Contraseña",
+  "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+
+  "signInTitle": "Iniciar sesión",
+  "signInSubmit": "Iniciar sesión",
+  "signInGoToSignUp": "¿No tienes cuenta? Regístrate",
+  "signInWithGoogle": "Continuar con Google",
+  "signInWithApple": "Continuar con Apple",
+
+  "signUpTitle": "Crear cuenta",
+  "signUpNameLabel": "Nombre",
+  "signUpNameEmpty": "El nombre no puede estar vacío",
+  "signUpConfirmPasswordLabel": "Confirmar contraseña",
+  "signUpPasswordsMismatch": "Las contraseñas no coinciden",
+  "signUpSubmit": "Crear cuenta",
+  "signUpGoToSignIn": "¿Ya tienes cuenta? Inicia sesión",
+
+  "emailLinkBusy": "Iniciando sesión…",
+  "emailLinkErrorTitle": "El enlace de inicio de sesión no es válido o ha expirado",
+  "emailLinkBackToSignIn": "Volver a iniciar sesión",
+
+  "profileTitle": "Perfil",
+  "profileSendPasswordReset": "Enviar correo para restablecer contraseña",
+  "profileSignOut": "Cerrar sesión",
+  "profileDeleteAccount": "Eliminar cuenta",
+  "profilePasswordResetSent": "Correo de restablecimiento enviado",
+  "profileNoEmailAssociated": "No hay correo asociado a esta cuenta",
+
+  "deleteAccountDialogTitle": "¿Eliminar cuenta?",
+  "deleteAccountDialogMessage": "Esto eliminará permanentemente tu cuenta y todos los datos asociados. Esta acción no se puede deshacer.",
+
+  "settingsTitle": "Ajustes",
+  "settingsAppearance": "Apariencia",
+  "settingsThemeSystem": "Predeterminado del sistema",
+  "settingsThemeLight": "Claro",
+  "settingsThemeDark": "Oscuro",
+  "settingsLanguage": "Idioma",
+  "settingsLocaleSystem": "Predeterminado del sistema",
+  "settingsAccount": "Cuenta",
+  "settingsProfile": "Perfil",
+  "settingsAbout": "Acerca de",
+  "settingsReplayOnboarding": "Repetir presentación inicial",
+  "settingsReplayOnboardingSubtitle": "Marca la presentación como no vista — el enrutador te lleva de vuelta",
+
+  "onboardingSkip": "Omitir",
+  "onboardingNext": "Siguiente",
+  "onboardingGetStarted": "Comenzar",
+  "onboardingSlideWelcomeTitle": "Bienvenido",
+  "onboardingSlideWelcomeBody": "Una plantilla que se quita del camino para que puedas desarrollar funciones desde el primer día.",
+  "onboardingSlideAuthTitle": "Autenticación integrada",
+  "onboardingSlideAuthBody": "Correo y contraseña, Google, Apple e inicio de sesión por enlace ya están conectados mediante un cliente intercambiable.",
+  "onboardingSlideFlagsTitle": "Observabilidad y banderas",
+  "onboardingSlideFlagsBody": "Analítica, banderas de funciones y bloqueos de actualización forzada están conectados detrás de interfaces — cambia de proveedor sin tocar las pantallas.",
+
+  "forceUpdateTitle": "Actualización requerida",
+  "forceUpdateMessage": "Se requiere una versión más nueva de la aplicación para continuar. Actualiza para seguir usándola.",
+  "forceUpdateInstalledLabel": "Instalada",
+  "forceUpdateRequiredLabel": "Requerida",
+  "forceUpdateOpenStore": "Abrir tienda",
+
+  "errorPageTitle": "Error",
+  "errorPageMessage": "Algo salió mal",
+  "errorPageGoHome": "Ir al inicio",
+  "errorPageUnknown": "Error desconocido"
+}

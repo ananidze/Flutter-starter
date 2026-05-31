@@ -1,0 +1,20 @@
+name: firebase_analytics_client
+description: A Firebase Analytics-backed analytics client.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  analytics_client:
+    path: ../analytics_client
+  firebase_analytics: ^11.4.5
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.5
+  very_good_analysis: ^10.2.0

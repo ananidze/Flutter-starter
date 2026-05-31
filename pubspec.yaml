@@ -1,0 +1,54 @@
+name: flutter_starter
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ^3.41.0
+
+dependencies:
+  analytics_client:
+    path: packages/analytics_client/analytics_client
+  api_client:
+    path: packages/api_client
+  app_links: ^7.0.0
+  app_ui:
+    path: packages/app_ui
+  authentication_client:
+    path: packages/authentication_client/authentication_client
+  bloc: ^9.2.0
+  equatable: ^2.0.7
+  feature_flags_client:
+    path: packages/feature_flags_client/feature_flags_client
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
+  form_inputs:
+    path: packages/form_inputs
+  go_router: ^17.2.3
+  intl: ^0.20.2
+  package_info_plus: ^8.3.1
+  persistent_storage:
+    path: packages/storage/persistent_storage
+  pub_semver: ^2.2.0
+  secure_storage:
+    path: packages/storage/secure_storage
+  shared_preferences: ^2.5.4
+  storage:
+    path: packages/storage/storage
+
+dev_dependencies:
+  bloc_lint: ^0.4.1
+  bloc_test: ^10.0.0
+  bloc_tools: ^0.1.0-dev.24
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.5
+  very_good_analysis: ^10.2.0
+
+flutter:
+  generate: true
+  uses-material-design: true
