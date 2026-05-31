@@ -50,7 +50,7 @@ dependencies:
   go_router: ^17.2.3
   intl: ^0.20.2
   meta: ^1.17.0
-  package_info_plus: ^8.3.1
+  package_info_plus: ^10.1.0
   persistent_storage:
     path: packages/storage/persistent_storage
   pub_semver: ^2.2.0
