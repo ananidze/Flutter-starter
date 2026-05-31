@@ -1,6 +1,7 @@
 name: secure_storage
 description: A Key/Value Secure Storage Client
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

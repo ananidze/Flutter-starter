@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter/app/router/app_routes.dart';
 import 'package:flutter_starter/features/auth/auth.dart';
 import 'package:flutter_starter/features/settings/cubit/settings_cubit.dart';
+import 'package:flutter_starter/features/settings/data/app_theme_mode.dart';
 import 'package:flutter_starter/features/settings/view/widgets/widgets.dart';
 import 'package:flutter_starter/l10n/l10n.dart';
 
@@ -26,7 +27,7 @@ class SettingsPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         children: [
           AppSectionHeader(title: l10n.settingsAppearance),
-          RadioGroup<ThemeMode>(
+          RadioGroup<AppThemeMode>(
             groupValue: state.themeMode,
             onChanged: (mode) {
               if (mode != null) unawaited(cubit.setThemeMode(mode));
@@ -34,15 +35,15 @@ class SettingsPage extends StatelessWidget {
             child: Column(
               children: [
                 ThemeModeOption(
-                  mode: ThemeMode.system,
+                  mode: AppThemeMode.system,
                   label: l10n.settingsThemeSystem,
                 ),
                 ThemeModeOption(
-                  mode: ThemeMode.light,
+                  mode: AppThemeMode.light,
                   label: l10n.settingsThemeLight,
                 ),
                 ThemeModeOption(
-                  mode: ThemeMode.dark,
+                  mode: AppThemeMode.dark,
                   label: l10n.settingsThemeDark,
                 ),
               ],

@@ -2,6 +2,7 @@ name: posthog_analytics_client
 description: A PostHog-backed analytics client.
 version: 1.0.0+1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

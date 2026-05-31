@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_starter/features/settings/cubit/settings_state.dart';
+import 'package:flutter_starter/features/settings/data/app_theme_mode.dart';
 import 'package:flutter_starter/features/settings/data/settings_repository.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
@@ -19,7 +20,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepository _repository;
   late final StreamSubscription<SettingsSnapshot> _subscription;
 
-  Future<void> setThemeMode(ThemeMode mode) => _repository.setThemeMode(mode);
+  Future<void> setThemeMode(AppThemeMode mode) =>
+      _repository.setThemeMode(mode);
 
   Future<void> setLocale(Locale? locale) => _repository.setLocale(locale);
 

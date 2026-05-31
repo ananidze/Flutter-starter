@@ -2,6 +2,7 @@ name: feature_flags_client
 description: A Generic Feature Flags Client Interface.
 version: 1.0.0+1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

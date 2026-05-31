@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_starter/features/settings/data/app_theme_mode.dart';
 import 'package:flutter_starter/features/settings/data/settings_repository.dart';
 
 class SettingsState extends Equatable {
   const SettingsState({
-    this.themeMode = ThemeMode.system,
+    this.themeMode = AppThemeMode.system,
     this.locale,
     this.hasSeenOnboarding = false,
   });
@@ -17,12 +19,12 @@ class SettingsState extends Equatable {
     );
   }
 
-  final ThemeMode themeMode;
+  final AppThemeMode themeMode;
   final Locale? locale;
   final bool hasSeenOnboarding;
 
   SettingsState copyWith({
-    ThemeMode? themeMode,
+    AppThemeMode? themeMode,
     Locale? Function()? locale,
     bool? hasSeenOnboarding,
   }) {

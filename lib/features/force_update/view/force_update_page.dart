@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter/features/force_update/cubit/force_update_cubit.dart';
 import 'package:flutter_starter/features/force_update/view/widgets/version_row.dart';
 import 'package:flutter_starter/l10n/l10n.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ForceUpdatePage extends StatelessWidget {
   const ForceUpdatePage({super.key});
@@ -57,9 +59,7 @@ class ForceUpdatePage extends StatelessWidget {
                     icon: const Icon(Icons.open_in_new),
                     onPressed: state.storeUrl.isEmpty
                         ? null
-                        : () => unawaited(
-                            context.read<ForceUpdateCubit>().openStore(),
-                          ),
+                        : () => unawaited(_openStore(state.storeUrl)),
                     label: Text(l10n.forceUpdateOpenStore),
                   ),
                 ),
@@ -69,5 +69,25 @@ class ForceUpdatePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _openStore(String storeUrl) async {
+    final uri = Uri.tryParse(storeUrl);
+    if (uri == null || !uri.hasScheme) {
+      await Clipboard.setData(ClipboardData(text: storeUrl));
+      return;
+    }
+
+    try {
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched) {
+        await Clipboard.setData(ClipboardData(text: storeUrl));
+      }
+    } on Exception {
+      await Clipboard.setData(ClipboardData(text: storeUrl));
+    }
   }
 }

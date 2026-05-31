@@ -1,6 +1,7 @@
 name: form_inputs
 description: A Dart package which exposes reusable form inputs and validation rules
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

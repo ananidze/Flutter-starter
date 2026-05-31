@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_starter/features/settings/data/app_theme_mode.dart';
 
 class ThemeModeOption extends StatelessWidget {
   const ThemeModeOption({
@@ -7,11 +8,11 @@ class ThemeModeOption extends StatelessWidget {
     super.key,
   });
 
-  final ThemeMode mode;
+  final AppThemeMode mode;
   final String label;
 
   @override
   Widget build(BuildContext context) {
-    return RadioListTile<ThemeMode>(value: mode, title: Text(label));
+    return RadioListTile<AppThemeMode>(value: mode, title: Text(label));
   }
 }

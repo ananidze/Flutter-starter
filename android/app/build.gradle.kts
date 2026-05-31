@@ -13,6 +13,22 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
+fun envOrProperty(envName: String, propertyName: String): String? {
+    return System.getenv(envName)?.takeIf { it.isNotBlank() }
+        ?: (keystoreProperties[propertyName] as String?)?.takeIf { it.isNotBlank() }
+}
+
+val releaseStoreFile = envOrProperty("ANDROID_KEYSTORE_PATH", "storeFile")
+val releaseKeyAlias = envOrProperty("ANDROID_KEYSTORE_ALIAS", "keyAlias")
+val releaseKeyPassword = envOrProperty("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD", "keyPassword")
+val releaseStorePassword = envOrProperty("ANDROID_KEYSTORE_PASSWORD", "storePassword")
+val hasReleaseSigning = listOf(
+    releaseStoreFile,
+    releaseKeyAlias,
+    releaseKeyPassword,
+    releaseStorePassword,
+).all { it != null }
+
 android {
     namespace = "com.example.verygoodcore.flutter_starter"
     compileSdk = flutter.compileSdkVersion
@@ -36,21 +52,17 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders["deepLinkScheme"] = "flutterstarter"
+        manifestPlaceholders["deepLinkHost"] = "example.com"
     }
 
     signingConfigs {
-        create("release") {
-            if (System.getenv("ANDROID_KEYSTORE_PATH") != null) {
-                storeFile = file(System.getenv("ANDROID_KEYSTORE_PATH"))
-                keyAlias = System.getenv("ANDROID_KEYSTORE_ALIAS")
-                keyPassword = System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-                storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
-                
-            } else {
-                keyAlias = keystoreProperties["keyAlias"] as String?
-                keyPassword = keystoreProperties["keyPassword"] as String?
-                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-                storePassword = keystoreProperties["storePassword"] as String?
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseStoreFile!!)
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+                storePassword = releaseStorePassword
             }
         }
     }
@@ -76,7 +88,9 @@ android {
 
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),

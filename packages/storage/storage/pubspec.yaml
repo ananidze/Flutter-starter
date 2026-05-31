@@ -1,6 +1,7 @@
 name: storage
 description: A Key/Value Storage Client for Dart.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

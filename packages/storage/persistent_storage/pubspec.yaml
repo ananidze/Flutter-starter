@@ -1,6 +1,7 @@
 name: persistent_storage
 description: Storage that saves data in the device's persistent memory.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

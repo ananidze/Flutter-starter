@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:flutter_starter/features/settings/data/app_theme_mode.dart';
+import 'package:meta/meta.dart';
 import 'package:storage/storage.dart';
 
 /// Persists user-controlled app settings (theme mode, locale, onboarding) to
@@ -34,7 +36,7 @@ class SettingsRepository {
     );
   }
 
-  Future<void> setThemeMode(ThemeMode mode) async {
+  Future<void> setThemeMode(AppThemeMode mode) async {
     await _write(_themeModeKey, _encodeThemeMode(mode));
     await _emit();
   }
@@ -82,16 +84,16 @@ class SettingsRepository {
     }
   }
 
-  static String _encodeThemeMode(ThemeMode mode) => switch (mode) {
-    ThemeMode.light => 'light',
-    ThemeMode.dark => 'dark',
-    ThemeMode.system => 'system',
+  static String _encodeThemeMode(AppThemeMode mode) => switch (mode) {
+    AppThemeMode.light => 'light',
+    AppThemeMode.dark => 'dark',
+    AppThemeMode.system => 'system',
   };
 
-  static ThemeMode _decodeThemeMode(String? raw) => switch (raw) {
-    'light' => ThemeMode.light,
-    'dark' => ThemeMode.dark,
-    _ => ThemeMode.system,
+  static AppThemeMode _decodeThemeMode(String? raw) => switch (raw) {
+    'light' => AppThemeMode.light,
+    'dark' => AppThemeMode.dark,
+    _ => AppThemeMode.system,
   };
 
   static Locale? _decodeLocale(String? raw) {
@@ -115,12 +117,12 @@ class SettingsSnapshot {
 
   /// Sensible defaults: follow system theme, system locale, no onboarding seen.
   static const SettingsSnapshot defaults = SettingsSnapshot(
-    themeMode: ThemeMode.system,
+    themeMode: AppThemeMode.system,
     locale: null,
     hasSeenOnboarding: false,
   );
 
-  final ThemeMode themeMode;
+  final AppThemeMode themeMode;
   final Locale? locale;
   final bool hasSeenOnboarding;
 

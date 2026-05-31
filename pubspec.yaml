@@ -3,6 +3,24 @@ description: A Very Good Project created by Very Good CLI.
 version: 1.0.0+1
 publish_to: none
 
+workspace:
+  - packages/analytics_client/analytics_client
+  - packages/analytics_client/firebase_analytics_client
+  - packages/analytics_client/posthog_analytics_client
+  - packages/api_client
+  - packages/app_ui
+  - packages/authentication_client/authentication_client
+  - packages/authentication_client/token_storage
+  - packages/feature_flags_client/feature_flags_client
+  - packages/feature_flags_client/firebase_remote_config_client
+  - packages/form_inputs
+  - packages/notifications_client/firebase_notifications_client
+  - packages/notifications_client/notifications_client
+  - packages/notifications_client/one_signal_notifications_client
+  - packages/storage/persistent_storage
+  - packages/storage/secure_storage
+  - packages/storage/storage
+
 environment:
   sdk: ^3.11.0
   flutter: ^3.41.0
@@ -18,6 +36,7 @@ dependencies:
   authentication_client:
     path: packages/authentication_client/authentication_client
   bloc: ^9.2.0
+  cupertino_icons: ^1.0.9
   equatable: ^2.0.7
   feature_flags_client:
     path: packages/feature_flags_client/feature_flags_client
@@ -30,6 +49,7 @@ dependencies:
     path: packages/form_inputs
   go_router: ^17.2.3
   intl: ^0.20.2
+  meta: ^1.17.0
   package_info_plus: ^8.3.1
   persistent_storage:
     path: packages/storage/persistent_storage
@@ -39,6 +59,7 @@ dependencies:
   shared_preferences: ^2.5.4
   storage:
     path: packages/storage/storage
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   bloc_lint: ^0.4.1
@@ -46,9 +67,33 @@ dev_dependencies:
   bloc_tools: ^0.1.0-dev.24
   flutter_test:
     sdk: flutter
+  melos: ^7.8.0
   mocktail: ^1.0.5
   very_good_analysis: ^10.2.0
 
 flutter:
   generate: true
   uses-material-design: true
+
+melos:
+  useRootAsPackage: true
+  scripts:
+    analyze:
+      description: Analyze the root app and all local packages.
+      run: ./tool/analyze_all.sh
+
+    test:
+      description: Run tests for the root app, if present, and all packages with tests.
+      run: ./tool/test_all.sh
+
+    check:
+      description: Run format, analysis, Bloc lint, and tests.
+      run: |
+        dart format --set-exit-if-changed .
+        ./tool/analyze_all.sh
+        dart run bloc_tools:bloc lint .
+        ./tool/test_all.sh
+
+    build:android:production:
+      description: Build the production Android release APK.
+      run: ./tool/build_android_release.sh production lib/main_production.dart

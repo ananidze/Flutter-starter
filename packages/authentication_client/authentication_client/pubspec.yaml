@@ -1,6 +1,7 @@
 name: authentication_client
 description: Authentication client with an HTTP backend implementation.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0

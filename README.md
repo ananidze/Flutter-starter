@@ -57,7 +57,43 @@ flutter_starter/
 ### Prerequisites
 
 - Flutter `^3.41.0` / Dart `^3.11.0`
-- [Very Good CLI](https://github.com/VeryGoodOpenSource/very_good_cli): `dart pub global activate very_good_cli`
+- Optional: [Very Good CLI](https://github.com/VeryGoodOpenSource/very_good_cli): `dart pub global activate very_good_cli`
+
+Install local workspace tooling:
+
+```sh
+dart pub get
+dart run melos bootstrap
+```
+
+### Start a New App
+
+Clone or copy this starter, then run the app-creation script from the new
+project directory:
+
+```sh
+./tool/create_app.sh \
+  --app-name "Acme Tasks" \
+  --bundle-id com.acme.tasks \
+  --deep-link-host tasks.acme.com \
+  --prod-api-base-url https://api.tasks.acme.com \
+  --staging-api-base-url https://staging-api.tasks.acme.com
+```
+
+Preview the changes first:
+
+```sh
+./tool/create_app.sh \
+  --app-name "Acme Tasks" \
+  --bundle-id com.acme.tasks \
+  --deep-link-host tasks.acme.com \
+  --dry-run
+```
+
+The script updates the Dart package/imports, Android application id and
+namespace, iOS bundle ids, platform display names, web metadata, deep-link
+scheme/host, and optional API URLs. It refuses to run in a dirty git worktree
+unless `--force` is passed.
 
 ### Run
 
@@ -79,12 +115,14 @@ _Flutter Starter targets iOS, Android, Web, and Windows._
 ## Running Tests
 
 ```sh
-very_good test --coverage --test-randomize-ordering-seed random
+dart run melos run test
 ```
 
 Generate and view the coverage report:
 
 ```sh
+# Run from the package or app you want to measure.
+flutter test --coverage
 genhtml coverage/lcov.info -o coverage/
 open coverage/index.html
 ```
@@ -97,6 +135,12 @@ This project uses [bloc_lint](https://pub.dev/packages/bloc_lint) to enforce Blo
 
 ```sh
 dart run bloc_tools:bloc lint .
+```
+
+Run the full local check suite:
+
+```sh
+dart run melos run check
 ```
 
 You can also use the [official Bloc VSCode extension](https://marketplace.visualstudio.com/items?itemName=FelixAngelov.bloc) for inline linting. See [bloclibrary.dev/lint](https://bloclibrary.dev/lint/) for more.
@@ -161,6 +205,41 @@ GitHub Actions workflows are in [.github/workflows/](.github/workflows/):
 
 - `main.yaml` — runs analysis, tests, and coverage on every push/PR
 - `license_check.yaml` — verifies license headers across the codebase
+
+## Production Setup
+
+### Android Signing
+
+Build the production Android APK:
+
+```sh
+dart run melos run build:android:production
+```
+
+Release builds read signing credentials from environment variables first:
+
+```sh
+ANDROID_KEYSTORE_PATH=/path/to/upload-keystore.jks
+ANDROID_KEYSTORE_ALIAS=upload
+ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD=...
+ANDROID_KEYSTORE_PASSWORD=...
+```
+
+Alternatively, create `android/key.properties` with `storeFile`, `keyAlias`,
+`keyPassword`, and `storePassword`.
+
+### Deep Links
+
+Android deep-link placeholders live in
+`android/app/build.gradle.kts`:
+
+```kotlin
+manifestPlaceholders["deepLinkScheme"] = "flutterstarter"
+manifestPlaceholders["deepLinkHost"] = "example.com"
+```
+
+iOS registers the `flutterstarter` URL scheme in `ios/Runner/Info.plist`.
+Replace both values when renaming the starter for a real app.
 
 [coverage_badge]: coverage_badge.svg
 [internationalization_link]: https://docs.flutter.dev/ui/internationalization

@@ -175,12 +175,22 @@ class _AppViewState extends State<_AppView> {
     return MaterialApp.router(
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: settings.themeMode,
+      themeMode: settings.themeMode.toThemeMode(),
       locale: settings.locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: _router,
     );
+  }
+}
+
+extension on AppThemeMode {
+  ThemeMode toThemeMode() {
+    return switch (this) {
+      AppThemeMode.system => ThemeMode.system,
+      AppThemeMode.light => ThemeMode.light,
+      AppThemeMode.dark => ThemeMode.dark,
+    };
   }
 }
 

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:feature_flags_client/feature_flags_client.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_starter/features/force_update/cubit/force_update_state.dart';
 import 'package:pub_semver/pub_semver.dart';
 
@@ -18,10 +17,8 @@ class ForceUpdateCubit extends Cubit<ForceUpdateState> {
   ForceUpdateCubit({
     required FeatureFlagsClient flags,
     required String currentVersion,
-    Future<void> Function(String text)? clipboardWriter,
   }) : _flags = flags,
        _currentVersion = currentVersion,
-       _clipboardWriter = clipboardWriter ?? _defaultClipboardWriter,
        super(ForceUpdateState(currentVersion: currentVersion)) {
     _subscription = _flags.onChanged.listen((_) => check());
     check();
@@ -29,7 +26,6 @@ class ForceUpdateCubit extends Cubit<ForceUpdateState> {
 
   final FeatureFlagsClient _flags;
   final String _currentVersion;
-  final Future<void> Function(String text) _clipboardWriter;
   late final StreamSubscription<void> _subscription;
 
   void check() {
@@ -45,18 +41,6 @@ class ForceUpdateCubit extends Cubit<ForceUpdateState> {
         storeUrl: storeUrl,
       ),
     );
-  }
-
-  /// Copies the store URL to the clipboard as a no-launcher fallback so the
-  /// user can paste it into their browser. Apps that want true store-launch
-  /// behavior can pass a `clipboardWriter` that wraps `url_launcher`.
-  Future<void> openStore() async {
-    if (state.storeUrl.isEmpty) return;
-    await _clipboardWriter(state.storeUrl);
-  }
-
-  static Future<void> _defaultClipboardWriter(String text) {
-    return Clipboard.setData(ClipboardData(text: text));
   }
 
   static ForceUpdateStatus _evaluate(String current, String minimum) {

@@ -1,6 +1,7 @@
 name: api_client
 description: HTTP client for the app, wrapping Dio with auth, 401, and logging interceptors.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.11.0
