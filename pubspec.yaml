@@ -30,7 +30,7 @@ dependencies:
     path: packages/analytics_client/analytics_client
   api_client:
     path: packages/api_client
-  app_links: ^7.0.0
+  app_links: ^7.1.1
   app_ui:
     path: packages/app_ui
   authentication_client:
