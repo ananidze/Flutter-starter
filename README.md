@@ -68,8 +68,27 @@ dart run melos bootstrap
 
 ### Start a New App
 
-Clone or copy this starter, then run the app-creation script from the new
-project directory:
+Clone or copy this starter, initialize a fresh git repository, then run the
+app-creation script from the new project directory:
+
+```sh
+git clone <starter-repo-url> acme_tasks
+cd acme_tasks
+rm -rf .git
+git init
+```
+
+Preview the rewrite first:
+
+```sh
+./tool/create_app.sh \
+  --app-name "Acme Tasks" \
+  --bundle-id com.acme.tasks \
+  --deep-link-host tasks.acme.com \
+  --dry-run
+```
+
+Apply the rewrite:
 
 ```sh
 ./tool/create_app.sh \
@@ -80,20 +99,35 @@ project directory:
   --staging-api-base-url https://staging-api.tasks.acme.com
 ```
 
-Preview the changes first:
-
-```sh
-./tool/create_app.sh \
-  --app-name "Acme Tasks" \
-  --bundle-id com.acme.tasks \
-  --deep-link-host tasks.acme.com \
-  --dry-run
-```
-
 The script updates the Dart package/imports, Android application id and
 namespace, iOS bundle ids, platform display names, web metadata, deep-link
 scheme/host, and optional API URLs. It refuses to run in a dirty git worktree
 unless `--force` is passed.
+
+Useful options:
+
+| Option | Required | Description |
+| --- | --- | --- |
+| `--app-name` | Yes | Human-facing app name, e.g. `Acme Tasks`. |
+| `--bundle-id` | Yes | Reverse-DNS id used by Android and iOS, e.g. `com.acme.tasks`. |
+| `--package-name` | No | Dart package name; defaults to a snake_case version of `--app-name`. |
+| `--short-name` | No | Short web/app display name; defaults to `--app-name`. |
+| `--description` | No | Root/web description; defaults to `<app name> app.` |
+| `--deep-link-scheme` | No | Custom URL scheme; defaults to package name without underscores. |
+| `--deep-link-host` | No | App/universal-link host; defaults to `example.com`. |
+| `--dev-api-base-url` | No | Replaces the development API URL in `AppConfig`. |
+| `--staging-api-base-url` | No | Replaces the staging API URL in `AppConfig`. |
+| `--prod-api-base-url` | No | Replaces the production API URL in `AppConfig`. |
+| `--dry-run` | No | Prints planned replacements without changing files. |
+| `--skip-pub-get` | No | Skips `dart pub get` and `melos bootstrap` after rewriting. |
+| `--force` | No | Allows running with uncommitted changes. |
+
+After the script finishes:
+
+```sh
+dart run melos run check
+flutter run --flavor development --target lib/main_development.dart
+```
 
 ### Run
 
