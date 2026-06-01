@@ -9,7 +9,7 @@ environment:
 dependencies:
   equatable: ^2.0.8
   http: ^1.2.2
-  meta: ^1.15.0
+  meta: ^1.18.0
   rxdart: ^0.28.0
   token_storage:
     path: ../token_storage
